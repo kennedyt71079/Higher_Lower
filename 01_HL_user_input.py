@@ -1,4 +1,3 @@
-
 # Number Checking function
 def intcheck(question, low = None, high = None):
 
