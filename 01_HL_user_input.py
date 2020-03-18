@@ -1,5 +1,7 @@
+# HL Component 1 - Get (and check) user input
+
 # Number Checking function
-def intcheck(question, low = None, high = None):
+def intcheck(question, low=None, high=None):
 
     # sets  up error messages
     if low is not None and high is not None:
