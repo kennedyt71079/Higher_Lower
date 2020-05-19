@@ -1,6 +1,5 @@
 # HL component 2 - Generates random number between low and high
 
-
 import random
 
 low = 1
