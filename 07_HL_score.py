@@ -34,7 +34,7 @@ while rounds_played < rounds:
         if guesses_left == guesses_allowed - 1:
             print("Amazing! you got it in one guess")
         else:
-            print("Well done, you got it in {} guesses".format(len(guesses_allowed)))
+            print("Well done, you got it in {} guesses".format(len(guesses_left)))
         num_won += 1
     else:
         print("Sorry, you lose this round as you have run out of guesses")
