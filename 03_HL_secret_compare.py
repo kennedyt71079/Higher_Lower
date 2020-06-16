@@ -14,7 +14,7 @@ while guess != secret and guesses_left >= 1:
 
     guess = int(input("Guess: "))
 
-    #checks that guess is not a duplicate
+# checks that guess is not a duplicate
     if guess in already_guessed:
         print("You already guessed that number! Please try again. "
               "You *still* have {} guesses left".format(guesses_left))

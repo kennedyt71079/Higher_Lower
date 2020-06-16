@@ -15,7 +15,6 @@ while rounds_played < rounds:
     while guess != secret and guesses_left >= 1:
 
         guess = int(input("Guess: "))
-        guesses_left
 
     if guesses_left >= 1:
 
@@ -34,7 +33,7 @@ while rounds_played < rounds:
         if guesses_left == guesses_allowed - 1:
             print("Amazing! you got it in one guess")
         else:
-            print("Well done, you got it in {} guesses".format(len(guesses_allowed)))
+            print("Well done, you got it in {} guesses".format(guesses_left))
         num_won += 1
     else:
         print("Sorry, you lose this round as you have run out of guesses")
