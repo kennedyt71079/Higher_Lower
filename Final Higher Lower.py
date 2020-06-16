@@ -13,6 +13,7 @@ random_num = random.randrange(lowest, highest)
 
 # initialise variables
 already_guessed = []
+rounds_played = 0
 num_won = 0
 guess = ""
 
@@ -48,7 +49,10 @@ if guess == random_num:
     if guesses_allowed == guesses_allowed - 1:
         print("!!!Amazing! you got it in one guess!!!")
     else:
-        print("!!!Well done, you got it in {} guesses!!!".format(len(guesses_allowed)))
+        print("!!!Well done, you got it in {} guesses!!!".format(guesses_allowed))
     num_won += 1
 else:
     print("Sorry, you lose this round as you have run out of guesses")
+
+    print("Won: {} \t | \t Lost: {}".format(num_won, rounds_played - num_won + 1))
+    rounds_played +=1
