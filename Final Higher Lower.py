@@ -40,15 +40,15 @@ while guess != random_num and guesses_allowed >= 1:
             print("vvv Too high, try a lower number. Guesses left: {} vvv".format(guesses_allowed))
     else:
         if guess < random_num:
-            print("Too low")
+            print("^^^ Too low, try a higher number. Guesses left: {} ^^^".format(guesses_allowed))
         elif guess > random_num:
-            print("Too high")
+            print("vvv Too high, try a lower number. Guesses left: {} vvv".format(guesses_allowed))
 
 if guess == random_num:
     if guesses_allowed == guesses_allowed - 1:
         print("!!!Amazing! you got it in one guess!!!")
     else:
-        print("!!!Well done, you got it in {} guesses!!!".format(len(guesses_allowed)))
+        print("!!!Well done, you got it in {} guesses!!!".format(guesses_allowed))
     num_won += 1
 else:
     print("Sorry, you lose this round as you have run out of guesses")
