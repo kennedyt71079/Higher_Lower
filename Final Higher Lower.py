@@ -4,7 +4,16 @@ import random
 
 # ask for values
 lowest = int(input("Please enter a low number: "))
+
+# verify values are valid
+if lowest < 1:
+    print("Your number is too low, try again ")
+
 highest = int(input("Please enter a high number: "))
+
+if highest < lowest:
+    print("Your number is too low, Try again ")
+
 guesses_allowed = int(input("How many guesses do you want: "))
 
 # Generate random number
@@ -23,6 +32,16 @@ while guess != random_num and guesses_allowed >= 1:
 # checks that guess is not a duplicate
     if guess in already_guessed:
         print("You already guessed that number! Please try again. "
+              "You *still* have {} guesses left".format(guesses_allowed))
+        continue
+
+    if guess > highest:
+        print("Your guess is too high, Try again. "
+              "You *still* have {} guesses left".format(guesses_allowed))
+        continue
+
+    if guess < lowest:
+        print("Your guess it too low, Try again. "
               "You *still* have {} guesses left".format(guesses_allowed))
         continue
 
@@ -46,5 +65,5 @@ if guess == random_num:
         print("!!!Well done, you got it in {} guesses!!!".format(guesses))
 
 else:
-    print("Sorry, you lose this round as you have run out of guesses")
+    print("Sorry, you lose this game as you have run out of guesses")
     print("The number was {}".format(random_num))
