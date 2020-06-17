@@ -35,14 +35,9 @@ while guess != random_num and guesses_allowed >= 1:
               "You *still* have {} guesses left".format(guesses_allowed))
         continue
 
-    if guess > highest:
-        print("Your guess is too high, Try again. "
-              "You *still* have {} guesses left".format(guesses_allowed))
-        continue
-
-    if guess < lowest:
-        print("Your guess it too low, Try again. "
-              "You *still* have {} guesses left".format(guesses_allowed))
+    if guess < lowest or guess > highest:
+        print()
+        print("Your guess is not between {} and {}, Try again".format(lowest,highest))
         continue
 
     guesses_allowed -=1
