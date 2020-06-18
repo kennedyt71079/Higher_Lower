@@ -2,8 +2,17 @@
 
 import random
 
+# initialise variables
+already_guessed = []
+guesses = 0
+guess = ""
+lowest= 1
+
 # ask for values
-lowest = int(input("Please enter a low number: "))
+try:
+    lowest = int(input("Please enter a low number: "))
+except ValueError:
+    print("Please enter an integer")
 
 # verify values are valid
 if lowest < 1:
@@ -18,11 +27,6 @@ guesses_allowed = int(input("How many guesses do you want: "))
 
 # Generate random number
 random_num = random.randrange(lowest, highest)
-
-# initialise variables
-already_guessed = []
-guesses = 0
-guess = ""
 
 # start game
 while guess != random_num and guesses_allowed >= 1:
