@@ -5,7 +5,7 @@ def intcheck(question, low=None, high=None):
 
     # sets  up error messages
     if low is not None and high is not None:
-        error = "Please enter an interger between {} and {} " \
+        error = "Please enter an integer between {} and {} " \
                 "(inclusive)".format(low, high)
     elif low is not None and high is None:
         error = "Please enter an integer that is more than or " \

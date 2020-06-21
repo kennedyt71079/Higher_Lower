@@ -6,63 +6,101 @@ import random
 already_guessed = []
 guesses = 0
 guess = ""
-lowest= 1
+rounds_played = 1
 
-# ask for values
-try:
-    lowest = int(input("Please enter a low number: "))
-except ValueError:
-    print("Please enter an integer")
+# Number Checking function
+def intcheck(question, low=None, high=None):
 
-# verify values are valid
-if lowest < 1:
-    print("Your number is too low, try again ")
+    # sets  up error messages
+    if low is not None and high is not None:
+        error = "Please enter an interger between {} and {} " \
+                "(inclusive)".format(low, high)
+    elif low is not None and high is None:
+        error = "Please enter an integer that is more than or " \
+                "equal to {}".format(low)
+    elif low is None and high is not None:
+        error = "Please enter an integer that is less than or " \
+                "equal to {}".format(high)
+    else:
+        error = "Please enter an integer"
 
-highest = int(input("Please enter a high number: "))
+    while True:
 
-if highest < lowest:
-    print("Your number is too low, Try again ")
+        try:
+            response = int(input(question))
 
-guesses_allowed = int(input("How many guesses do you want: "))
+            # checks response is not too low
+            if low is not None and response < low:
+                print(error)
+                continue
+
+            # checks response is not too high
+            if high is not None and response > high:
+                print(error)
+                continue
+
+            return response
+
+        except ValueError:
+            print(error)
+            continue
+
+
+# Main Routine
+low = intcheck("Low Number")
+highest = intcheck("High Number: ", low + 1)
+rounds = intcheck("Rounds: ", 1)
+guesses_allowed = intcheck("Guesses allowed: ", low, highest)
 
 # Generate random number
-random_num = random.randrange(lowest, highest)
+random_num = random.randrange(low, highest)
 
 # start game
 while guess != random_num and guesses_allowed >= 1:
 
-    guess = int(input("Guess: "))
+    keep_going = ""
+    while keep_going:
+        print("Round {}".format(rounds_played))
 
-# checks that guess is not a duplicate
-    if guess in already_guessed:
-        print("You already guessed that number! Please try again. "
-              "You *still* have {} guesses left".format(guesses_allowed))
-        continue
+        guess = int(input("Guess: "))
 
-    if guess < lowest or guess > highest:
-        print()
-        print("Your guess is not between {} and {}, Try again".format(lowest,highest))
-        continue
+        # checks that guess is not a duplicate
+        if guess in already_guessed:
+            print("You already guessed that number! Please try again. "
+                  "You *still* have {} guesses left".format(guesses_allowed))
+            continue
 
-    guesses_allowed -=1
-    already_guessed.append(guess)
+        if guess < low or guess > highest:
+            print()
+            print("Your guess is not between {} and {}, Try again".format(low, highest))
+            continue
 
-    # if user has guesses left
-    if guesses_allowed >= 1:
+        guesses_allowed -= 1
+        already_guessed.append(guess)
 
-        if guess < random_num:
-            print("^^^ Too low, try a higher number. Guesses left: {} ^^^".format(guesses_allowed))
+        # if user has guesses left
+        if guesses_allowed >= 1:
 
-        elif guess > random_num:
-            print("vvv Too high, try a lower number. Guesses left: {} vvv".format(guesses_allowed))
-    guesses += 1
+            if guess < random_num:
+                print("^^^ Too low, try a higher number. Guesses left: {} ^^^".format(guesses_allowed))
 
-if guess == random_num:
-    if guesses_allowed == guesses_allowed - 1:
-        print("!!!Amazing! you got it in one guess!!!")
+            elif guess > random_num:
+                print("vvv Too high, try a lower number. Guesses left: {} vvv".format(guesses_allowed))
+        guesses += 1
+
+    if guess == random_num:
+        if guesses_allowed == guesses_allowed - 1:
+            print("!!!Amazing! you got it in one guess!!!")
+        else:
+            print("!!!Well done, you got it in {} guesses!!!".format(guesses))
+
     else:
-        print("!!!Well done, you got it in {} guesses!!!".format(guesses))
+        print("Sorry, you lose this round as you have run out of guesses")
+        print("The number was {}".format(random_num))
+        rounds_played += 1
 
-else:
-    print("Sorry, you lose this game as you have run out of guesses")
-    print("The number was {}".format(random_num))
+    if rounds_played < rounds:
+        keep_going = input("press <enter> for next round or any key to quit")
+    else:
+        rounds == rounds_played
+        print("You have gotten to the end of the game")
