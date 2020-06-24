@@ -105,7 +105,7 @@ while guess != random_num and guesses_allowed >= 1:
     if guess < low or guess > highest:
         print()
         print("Your guess is not between {} and {}, Try again".format(low, highest))
-    continue
+        continue
 
     guesses_allowed -= 1
     already_guessed.append(guess)
