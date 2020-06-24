@@ -55,45 +55,45 @@ random_num = random.randrange(low, highest)
 # start game
 while guess != random_num and guesses_allowed >= 1:
 
-    # Number Checking function
-    def intcheck(question, low=None, high=None):
+        # Number Checking function
+        def intcheck(question, low=None, high=None):
 
-        # sets  up error messages
-        if low is not None and high is not None:
-            error = "Please enter an interger between {} and {} " \
-                    "(inclusive)".format(low, high)
-        elif low is not None and high is None:
-            error = "Please enter an integer that is more than or " \
-                    "equal to {}".format(low)
-        elif low is None and high is not None:
-            error = "Please enter an integer that is less than or " \
-                    "equal to {}".format(high)
-        else:
-            error = "Please enter an integer"
+            # sets  up error messages
+            if low is not None and high is not None:
+                error = "Please enter an interger between {} and {} " \
+                        "(inclusive)".format(low, high)
+            elif low is not None and high is None:
+                error = "Please enter an integer that is more than or " \
+                        "equal to {}".format(low)
+            elif low is None and high is not None:
+                error = "Please enter an integer that is less than or " \
+                        "equal to {}".format(high)
+            else:
+                error = "Please enter an integer"
 
-        while True:
+            while True:
 
-            try:
-                response = int(input(question))
+                try:
+                    response = int(input(question))
 
-                # checks response is not too low
-                if low is not None and response < low:
+                    # checks response is not too low
+                    if low is not None and response < low:
+                        print(error)
+                        continue
+
+                    # checks response is not too high
+                    if high is not None and response > high:
+                        print(error)
+                        continue
+
+                    return response
+
+                except ValueError:
                     print(error)
                     continue
 
-                # checks response is not too high
-                if high is not None and response > high:
-                    print(error)
-                    continue
-
-                return response
-
-            except ValueError:
-                print(error)
-                continue
-
-    # Main Routine
-    guess = intcheck("Guess: ")
+# Main Routine
+guess = intcheck("Guess: ")
 
     # checks that guess is not a duplicate
     if guess in already_guessed:
@@ -105,6 +105,7 @@ while guess != random_num and guesses_allowed >= 1:
     if guess < low or guess > highest:
         print()
         print("Your guess is not between {} and {}, Try again".format(low, highest))
+        continue
 
     guesses_allowed -= 1
     already_guessed.append(guess)
@@ -125,5 +126,5 @@ if guess == random_num:
     else:
         print("!!!Well done, you got it in {} guesses!!!".format(guesses))
 else:
-    print("Sorry, you lose this game as you have run out of guesses")
+    print("Sorry, you lose this round as you have run out of guesses")
     print("The number was {}".format(random_num))
